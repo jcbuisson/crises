@@ -1,0 +1,14 @@
+generator client {
+   provider = "prisma-client-js"
+}
+
+model crise {
+   id          Int       @default(autoincrement()) @id
+   date        DateTime
+   intensity   Int
+}
+
+datasource db {
+   provider = "postgresql"
+   url      = env("DATABASE_URL")
+}
