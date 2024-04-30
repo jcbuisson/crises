@@ -1,14 +1,17 @@
 <template>
-   <div>
+   <div class="p-4">
       <canvas id="chartCanvas"></canvas>
   </div>
 </template>
 
 <script setup>
    import { ref, onMounted } from "vue"
-   import Chart from 'chart.js/auto'
+   import { Chart, registerables } from 'chart.js'
+   import 'chartjs-adapter-date-fns'
 
    import app from '/src/client-app.js'
+
+   Chart.register(...registerables)
 
    const chartInstance = ref(null)
 
@@ -18,33 +21,38 @@
       chartInstance.value = new Chart(ctx, {
          type: 'bar',
          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
-            label: 'My First Dataset',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-               'rgba(255, 99, 132, 0.2)',
-               'rgba(54, 162, 235, 0.2)',
-               'rgba(255, 206, 86, 0.2)',
-               'rgba(75, 192, 192, 0.2)',
-               'rgba(153, 102, 255, 0.2)',
-               'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-               'rgba(255, 99, 132, 1)',
-               'rgba(54, 162, 235, 1)',
-               'rgba(255, 206, 86, 1)',
-               'rgba(75, 192, 192, 1)',
-               'rgba(153, 102, 255, 1)',
-               'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+               label: 'Crises',
+               data: [
+                  { x: new Date('2023-02-01'), y: 8 },
+                  { x: new Date('2023-03-02'), y: 6 },
+                  { x: new Date('2023-05-03'), y: 4 },
+                  { x: new Date('2023-06-04'), y: 2 },
+                  { x: new Date('2023-10-05'), y: 1 },
+                  { x: new Date('2023-12-06'), y: 3 },
+               ],
             }]
          },
          options: {
             scales: {
+               x: {
+                  type: 'time',
+                  time: {
+                     unit: 'day',
+                     displayFormats: {
+                        day: 'yyyy dd MM'
+                     }
+                  },
+                  title: {
+                     display: false,
+                  }
+               },
                y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  title: {
+                     display: true,
+                     text: 'Intensité'
+                  }
                }
             }
          }
