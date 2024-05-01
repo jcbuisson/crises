@@ -1,6 +1,11 @@
 <template>
    <div style="padding: 20px;">
       <div ref="vis"></div>
+      <hr/>
+      <ul>
+         <li class="">La zone verte correspond à la période de prise en charge par le service de psychiatrie du CHU de Purpan</li>
+         <li class="">L'intensité d'une crise est évaluée sur une échelle de 0 à 10</li>
+      </ul>
    </div>
 </template>
 
@@ -59,7 +64,8 @@ const spec = computed(() => ({
                field: "intensity",
                type: "quantitative",
                title: "",
-            }
+            },
+            // color: {field: "intensity", type: "nominal", title: "Période du traitement"},
          },
       },
 
@@ -69,8 +75,8 @@ const spec = computed(() => ({
             "y": {
                field: "intensity",
                type: "quantitative",
-               title: "intensité",
-            }
+               title: "Intensité de la crise",
+            },
          },
       },
    ],
