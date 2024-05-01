@@ -1,55 +1,51 @@
 <template>
-   <div ref="vis"></div>
+   <div style="padding: 20px;">
+      <div ref="vis"></div>
+   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import embed from 'vega-embed'
 
-const vis = ref(null)
+import app from '/src/client-app.js'
 
-const spec = {
+
+const vis = ref(null)
+const criseList = ref([])
+
+const spec = computed(() => ({
    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
    description: "A simple time-series line chart.",
+   width: 1024,
+   height: 400,
+   // config: {
+   //    locale: "fr-FR",
+   // },
    data: {
-      values: [
-         // Noel 2022
-         {"date": "2022-12-30", "value": 7},
-
-         // Rabat
-         {"date": "2023-06-01", "value": 7},
-         {"date": "2023-06-02", "value": 7},
-         {"date": "2023-06-03", "value": 7},
-         {"date": "2023-06-04", "value": 8},
-
-         // Samu
-         {"date": "2023-06-27", "value": 8},
-         {"date": "2023-06-28", "value": 8},
-         {"date": "2023-06-29", "value": 8},
-         {"date": "2023-09-30", "value": 10},
-
-         // Paques 2024
-         {"date": "2024-04-20", "value": 4},
-         {"date": "2024-04-21", "value": 5},
-         {"date": "2024-04-22", "value": 4},
-
-         {"date": "2024-04-30", "value": 2},
-      ]
+      values: criseList.value,
    },
    encoding: {
       x: {
-         field: "date",
-         type: "temporal",
-         title: "",
-      },
+            field: "date",
+            scale: {
+               type: "time",
+               domain: ["2023-05-01", "2024-12-31"],
+            },
+            axis: {
+               formatType: "time",
+               format: "%b %Y",
+            },
+            title: "",
+         },
    },
    layer: [
       // goal layer ; painted first to stay behind
       {
          data: {
             values: [
-               {"date": "2023-04-27", "value": 10},
-               {"date": "2024-04-21", "value": 10},
+               {"date": "2023-04-27", "intensity": 10},
+               {"date": "2024-04-21", "intensity": 10},
             ],
          },
          mark: {
@@ -60,7 +56,7 @@ const spec = {
          },
          encoding: {
             y: {
-               field: "value",
+               field: "intensity",
                type: "quantitative",
                title: "",
             }
@@ -71,16 +67,17 @@ const spec = {
          mark: 'bar',
          "encoding": {
             "y": {
-               field: "value",
+               field: "intensity",
                type: "quantitative",
                title: "intensité",
             }
          },
       },
    ],
-}
+}))
 
-onMounted(() => {
-   embed(vis.value, spec)
+onMounted(async () => {
+   criseList.value = await app.service('crise').findMany({})
+   await embed(vis.value, spec.value)
 })
 </script>
