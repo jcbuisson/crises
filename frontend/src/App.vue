@@ -1,62 +1,31 @@
 <template>
-   <div class="p-4">
-      <canvas id="chartCanvas"></canvas>
-  </div>
+   <div id="vis"></div>
 </template>
 
 <script setup>
-   import { ref, onMounted } from "vue"
-   import { Chart, registerables } from 'chart.js'
-   import 'chartjs-adapter-date-fns'
+import embed from 'vega-embed'
 
-   import app from '/src/client-app.js'
-
-   Chart.register(...registerables)
-
-   const chartInstance = ref(null)
-
-   onMounted(() => {
-      const ctx = document.getElementById('chartCanvas').getContext('2d')
-
-      chartInstance.value = new Chart(ctx, {
-         type: 'bar',
-         data: {
-            datasets: [{
-               label: 'Crises',
-               data: [
-                  { x: new Date('2023-02-01'), y: 8 },
-                  { x: new Date('2023-03-02'), y: 6 },
-                  { x: new Date('2023-05-03'), y: 4 },
-                  { x: new Date('2023-06-04'), y: 2 },
-                  { x: new Date('2023-10-05'), y: 1 },
-                  { x: new Date('2023-12-06'), y: 3 },
-               ],
-            }]
-         },
-         options: {
-            scales: {
-               x: {
-                  type: 'time',
-                  time: {
-                     unit: 'day',
-                     displayFormats: {
-                        day: 'yyyy dd MM'
-                     }
-                  },
-                  title: {
-                     display: false,
-                  }
-               },
-               y: {
-                  beginAtZero: true,
-                  title: {
-                     display: true,
-                     text: 'Intensité'
-                  }
-               }
-            }
-         }
-      })
-   })
-
+var yourVlSpec = {
+   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+   description: 'A simple bar chart with embedded data.',
+   data: {
+      values: [
+      {a: 'A', b: 28},
+      {a: 'B', b: 55},
+      {a: 'C', b: 43},
+      {a: 'D', b: 91},
+      {a: 'E', b: 81},
+      {a: 'F', b: 53},
+      {a: 'G', b: 19},
+      {a: 'H', b: 87},
+      {a: 'I', b: 52}
+      ]
+   },
+   mark: 'bar',
+   encoding: {
+      x: {field: 'a', type: 'ordinal'},
+      y: {field: 'b', type: 'quantitative'}
+   }
+};
+embed('#vis', yourVlSpec)
 </script>
