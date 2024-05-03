@@ -4,7 +4,8 @@
       <hr/>
       <ul>
          <li class="">La zone verte correspond à la période de prise en charge par le service de psychiatrie du CHU de Purpan</li>
-         <li class="">L'intensité d'une crise est évaluée sur une échelle de 0 à 10</li>
+         <li class="">La zone orange correspond à la période d'hospitalisation</li>
+         <li class="">L'intensité d'une crise est évaluée sur une échelle de 0 à 10 (10 = appel au SAMU)</li>
       </ul>
    </div>
 </template>
@@ -12,6 +13,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import embed from 'vega-embed'
+import { format } from 'date-fns'
 
 import app from '/src/client-app.js'
 
@@ -21,8 +23,8 @@ const criseList = ref([])
 
 const spec = computed(() => ({
    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-   description: "A simple time-series line chart.",
-   width: 1024,
+   // description: "A simple time-series line chart.",
+   width: screenWidth.value - 100,
    height: 400,
    // config: {
    //    locale: "fr-FR",
@@ -32,20 +34,20 @@ const spec = computed(() => ({
    },
    encoding: {
       x: {
-            field: "date",
-            scale: {
-               type: "time",
-               domain: ["2023-05-01", "2024-12-31"],
-            },
-            axis: {
-               formatType: "time",
-               format: "%b %Y",
-            },
-            title: "",
+         field: "date",
+         scale: {
+            type: "time",
+            domain: ["2023-05-01", format(new Date(), 'yyyy-MM-dd')],
          },
+         axis: {
+            formatType: "time",
+            format: "%b %Y",
+         },
+         title: "",
+      },
    },
    layer: [
-      // goal layer ; painted first to stay behind
+      // green area layer ; painted first to stay behind
       {
          data: {
             values: [
@@ -65,13 +67,36 @@ const spec = computed(() => ({
                type: "quantitative",
                title: "",
             },
-            // color: {field: "intensity", type: "nominal", title: "Période du traitement"},
          },
       },
 
+      // orange area layer ; painted first to stay behind
+      {
+         data: {
+            values: [
+               {"date": "2023-07-01", "intensity": 10},
+               {"date": "2023-07-31", "intensity": 10},
+            ],
+         },
+         mark: {
+            type: "area",
+            interpolate: 'step-after',
+            color: "#f2af4930",
+            clip: true,
+         },
+         encoding: {
+            y: {
+               field: "intensity",
+               type: "quantitative",
+               title: "",
+            },
+         },
+      },
+
+      // crises
       {
          mark: 'bar',
-         "encoding": {
+         encoding: {
             "y": {
                field: "intensity",
                type: "quantitative",
@@ -83,7 +108,16 @@ const spec = computed(() => ({
 }))
 
 onMounted(async () => {
+   window.addEventListener("resize", updateWidth)
    criseList.value = await app.service('crise').findMany({})
    await embed(vis.value, spec.value)
 })
+
+const screenWidth = ref(window.innerWidth)
+
+async function updateWidth() {
+   screenWidth.value = window.innerWidth
+   await embed(vis.value, spec.value)
+}
+
 </script>
