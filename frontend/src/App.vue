@@ -97,11 +97,15 @@ const spec = computed(() => ({
       {
          mark: 'bar',
          encoding: {
-            "y": {
+            y: {
                field: "intensity",
                type: "quantitative",
                title: "Intensité de la crise",
             },
+            tooltip: [
+               { field: "intensity", type: "quantitative" },
+               { field: "comment", type: "text" },
+            ]
          },
       },
    ],

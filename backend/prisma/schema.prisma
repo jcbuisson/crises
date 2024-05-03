@@ -6,6 +6,7 @@ model crise {
    id          Int       @default(autoincrement()) @id
    date        DateTime
    intensity   Int
+   comment     String?
 }
 
 datasource db {
