@@ -7,11 +7,11 @@
          <li class="">La zone orange correspond à la période d'hospitalisation</li>
          <li class="">L'intensité d'une crise est évaluée sur une échelle de 0 à 10</li>
          <ul>
-            <li>10: SAMU</li>
-            <li>8: Urgences</li>
-            <li>5: Bris d'objets</li>
-            <li>3: Insultes</li>
-            <li>1: Aggressif verbalement</li>
+            <li>  - 1: Aggressif verbalement</li>
+            <li>  - 3: Insultes</li>
+            <li>  - 5: Bris d'objets</li>
+            <li>  - 8: Urgences</li>
+            <li>  - 10: SAMU</li>
          </ul>
       </ul>
    </div>
