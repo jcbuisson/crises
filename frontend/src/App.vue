@@ -7,11 +7,11 @@
          <li class="">- Zone orange : hospitalisation</li>
          <li class="">- Intensité d'une crise :</li>
          <ul>
-            <li>   • 1: Aggressif verbalement</li>
-            <li>   • 3: Insultes</li>
-            <li>   • 5: Bris d'objets</li>
-            <li>   • 8: Urgences</li>
-            <li>   • 10: SAMU</li>
+            <li class="ml-3">• 1: Aggressif verbalement</li>
+            <li class="ml-3">• 3: Insultes</li>
+            <li class="ml-3">• 5: Bris d'objets</li>
+            <li class="ml-3">• 8: Urgences</li>
+            <li class="ml-3">• 10: SAMU</li>
          </ul>
       </ul>
    </div>
