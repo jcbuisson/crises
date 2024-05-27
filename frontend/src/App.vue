@@ -3,15 +3,15 @@
       <div ref="vis"></div>
       <hr/>
       <ul>
-         <li class="">La zone verte correspond à la période de prise en charge par le service de psychiatrie du CHU de Purpan</li>
-         <li class="">La zone orange correspond à la période d'hospitalisation</li>
-         <li class="">L'intensité d'une crise est évaluée sur une échelle de 0 à 10</li>
+         <li class="">- Zone verte : prise en charge par le service de psychiatrie du CHU de Purpan</li>
+         <li class="">- Zone orange : hospitalisation</li>
+         <li class="">- Intensité d'une crise :</li>
          <ul>
-            <li>  - 1: Aggressif verbalement</li>
-            <li>  - 3: Insultes</li>
-            <li>  - 5: Bris d'objets</li>
-            <li>  - 8: Urgences</li>
-            <li>  - 10: SAMU</li>
+            <li>   • 1: Aggressif verbalement</li>
+            <li>   • 3: Insultes</li>
+            <li>   • 5: Bris d'objets</li>
+            <li>   • 8: Urgences</li>
+            <li>   • 10: SAMU</li>
          </ul>
       </ul>
    </div>
