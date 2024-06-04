@@ -3,7 +3,7 @@
       <div ref="vis"></div>
       <hr/>
       <ul>
-         <li class="">- Zone verte : prise en charge par le service de psychiatrie du CHU de Purpan</li>
+         <li class="">- Zone verte : prise en charge CHU de Purpan</li>
          <li class="">- Zone orange : hospitalisation</li>
          <li class="">- Intensité d'une crise :</li>
          <ul>
