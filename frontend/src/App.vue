@@ -74,6 +74,9 @@ const spec = computed(() => ({
                type: "quantitative",
                title: "",
             },
+            tooltip: [
+            { field: "comment", type: "text", title: "Prise en charge Purpan" },
+            ],
          },
       },
 
@@ -97,6 +100,35 @@ const spec = computed(() => ({
                type: "quantitative",
                title: "",
             },
+            tooltip: [
+               { field: "comment", type: "text", title: "Hospitalisation" },
+            ],
+         },
+      },
+
+      // yellow area layer ; painted first to stay behind
+      {
+         data: {
+            values: [
+               {"date": "2024-06-01", "intensity": 10},
+               {"date": "2024-07-10", "intensity": 10},
+            ],
+         },
+         mark: {
+            type: "area",
+            interpolate: 'step-after',
+            color: "#FFFF99",
+            clip: true,
+         },
+         encoding: {
+            y: {
+               field: "intensity",
+               type: "quantitative",
+               title: "",
+            },
+            tooltip: [
+               { field: "comment", type: "text", title: "Séjour Maroc" },
+            ],
          },
       },
 
@@ -110,9 +142,9 @@ const spec = computed(() => ({
                title: "Intensité de la crise",
             },
             tooltip: [
-               { field: "intensity", type: "quantitative" },
-               { field: "comment", type: "text" },
-            ]
+               { field: "intensity", type: "quantitative", title: "Intensité" },
+               { field: "comment", type: "text", title: "Commentaire" },
+            ],
          },
       },
    ],
