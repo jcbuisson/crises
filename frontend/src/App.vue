@@ -110,7 +110,7 @@ const spec = computed(() => ({
       {
          data: {
             values: [
-               {"date": "2024-06-01", "intensity": 10},
+               {"date": "2024-06-08", "intensity": 10},
                {"date": "2024-07-10", "intensity": 10},
             ],
          },
@@ -142,8 +142,9 @@ const spec = computed(() => ({
                title: "Intensité de la crise",
             },
             tooltip: [
-               { field: "intensity", type: "quantitative", title: "Intensité" },
-               { field: "comment", type: "text", title: "Commentaire" },
+            { field: "date", type: "date", title: "Date" },
+            { field: "intensity", type: "quantitative", title: "Intensité" },
+            { field: "comment", type: "text", title: "Commentaire" },
             ],
          },
       },
