@@ -132,6 +132,32 @@ const spec = computed(() => ({
          },
       },
 
+      // yellow area layer ; painted first to stay behind
+      {
+         data: {
+            values: [
+               {"date": "2024-07-27", "intensity": 10},
+               {"date": "2024-09-23", "intensity": 10},
+            ],
+         },
+         mark: {
+            type: "area",
+            interpolate: 'step-after',
+            color: "#FFFF99",
+            clip: true,
+         },
+         encoding: {
+            y: {
+               field: "intensity",
+               type: "quantitative",
+               title: "",
+            },
+            tooltip: [
+               { field: "comment", type: "text", title: "Séjour Maroc" },
+            ],
+         },
+      },
+
       // crises
       {
          mark: 'bar',
