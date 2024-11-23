@@ -162,7 +162,7 @@ const spec = computed(() => ({
       {
          data: {
             values: [
-               {"date": "2023-11-18", "intensity": 10},
+               {"date": "2024-11-18", "intensity": 10},
                {"date": "2024-12-31", "intensity": 10},
             ],
          },
