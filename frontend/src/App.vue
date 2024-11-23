@@ -7,7 +7,7 @@
          <li class="">- Zone orange : hospitalisation</li>
          <li class="">- Intensité d'une crise :</li>
          <ul>
-            <li class="ml-3">• 1: Agressif verbalement, tout est de la merde</li>
+            <li class="ml-3">• 1: Agressif verbalement, très négatif sur tout</li>
             <li class="ml-3">• 3: Insultes</li>
             <li class="ml-3">• 5: Bris d'objets</li>
             <li class="ml-3">• 8: Urgences</li>
