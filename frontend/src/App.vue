@@ -210,6 +210,32 @@ const spec = computed(() => ({
          },
       },
 
+      // green area layer ; painted first to stay behind
+      {
+         data: {
+            values: [
+               {"date": "2025-05-17", "intensity": 10},
+               {"date": "2025-05-27", "intensity": 10},
+            ],
+         },
+         mark: {
+            type: "area",
+            interpolate: 'step-after',
+            color: "#00440030",
+            clip: true,
+         },
+         encoding: {
+            y: {
+               field: "intensity",
+               type: "quantitative",
+               title: "",
+            },
+            tooltip: [
+            { field: "comment", type: "text", title: "Christophe seul à Rabat" },
+            ],
+         },
+      },
+
       // crises
       {
          mark: 'bar',
