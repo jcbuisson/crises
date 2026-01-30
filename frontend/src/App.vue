@@ -210,6 +210,32 @@ const spec = computed(() => ({
          },
       },
 
+      // green area layer ; painted first to stay behind
+      {
+         data: {
+            values: [
+               {"date": "2025-11-20", "intensity": 10},
+               {"date": "2026-03-01", "intensity": 10},
+            ],
+         },
+         mark: {
+            type: "area",
+            interpolate: 'step-after',
+            color: "#00440030",
+            clip: true,
+         },
+         encoding: {
+            y: {
+               field: "intensity",
+               type: "quantitative",
+               title: "",
+            },
+            tooltip: [
+            { field: "comment", type: "text", title: "Prise en charge Purpan" },
+            ],
+         },
+      },
+
       // crises
       {
          mark: 'bar',
